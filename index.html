@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/users',{
+            method:'GET',
+        })
+    .then((response) => {
+        return response.json()
+    })
+    .then((data) => {
+        console.log(data)
+        
+        class User {
+            constructor(name, username, id, address, phone, company) {
+                this.name = name;
+                this.username = username;
+                this.id = id;
+                this.address = address;
+                this.phone = phone;
+                this.company = company;
+            }
+
+            set setName(name) {
+                this.name = name;
+            }
+            set setUsername(username) {
+                this.username = username;
+            }
+            set setId(id) {
+                this.id = id;
+            }
+            set setAddress(address) {
+                this.address = address;
+            }
+            set setPhone(phone) {
+                this.phone = phone;
+            }
+            set setCompany(company) {
+                this.company = company;
+            }
+
+            get getName() {
+                return this.name;
+            }
+            get getUsername() {
+                return this.username;
+            }
+            get getId() {
+                return this.id;
+            }
+            get getAddress() {
+                return this.address;
+            }
+            get getPhone() {
+                return this.phone;
+            }
+            get getCompany() {
+                return this.company;
+            }
+        }
+
+        let user = new User();
+        for(let i = 0; i < data.length; i++) {
+            const element = data[i]
+            user.setName = element.name;
+            user.setUsername = element.username;
+            user.setId = element.id;
+            user.setAddress = element.address.city;
+            user.setPhone = element.phone;
+            user.setCompany = element.company.name;
+            console.log(element)
+            render()
+        }
+        
+        function render() {
+            let div = document.createElement('div')
+            document.body.append(div)
+            div.innerHTML += user.getName;
+            div.innerHTML += user.getUsername;
+            div.innerHTML += user.getId;
+            div.innerHTML += user.getAddress;
+            div.innerHTML += user.getPhone;
+            div.innerHTML += user.getCompany;
+        }
+    })
+    </script>
+</body>
+</html>
